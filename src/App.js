@@ -3,6 +3,7 @@ import { connect, sendMsg } from "./api";
 import "./App.css";
 import Header from './components/Header/Header';
 import ChatHistory from './components/ChatHistory/ChatHistory';
+import MessageControls from './components/MessageControls/MessageControls';
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <ChatHistory chatHistory={this.state.chatHistory} />
+        <MessageControls />
         <button onClick={this.send}>Hit</button>
       </div>
     );
@@ -29,7 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     connect((msg) => {
-      console.log("New Message")
+      console.log("New text")
       this.setState(prevState => ({
         chatHistory: [...this.state.chatHistory, msg]
       }))

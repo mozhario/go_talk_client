@@ -1,0 +1,35 @@
+.chat-controls {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+
+    &__message-input {
+        outline: none;
+        width: calc(100% - 100px);
+        box-sizing: border-box;
+        padding: 10px 80px 10px 10px;
+        border: 3px lightgrey inset;
+        resize: none;
+        float: left;
+    }
+
+    &__send-button {
+        background-color: rgb(239, 239, 239);
+        height: 70px;
+        width: 70px;
+        margin-left: 10px;
+        float: left;
+        border: 3px lightgrey outset;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover {
+            background-color:rgb(245, 245, 245);
+        }
+    
+        &:active {
+            border: 3px lightgrey inset;
+        }
+    }
+}
