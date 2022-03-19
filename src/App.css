@@ -2,30 +2,3 @@
   height: 100vw;
   background: cadetblue;
 }
-
-.App {
-  max-width: 840px;
-  width: 100%;
-  position: absolute;
-  height: auto;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 12px auto;
-  padding: 8px;
-  /* height: 100%;
-  box-sizing: border-box; */
-  background-color: rgb(224, 224, 224);
-  border: 3px outset lightgrey;
-  box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.2);
-  /* font-family: 'Press Start 2P', cursive; */
-  /* font-family: 'Anonymous Pro', monospace; */
-  font-family: monospace;
-}
-
-@media screen and (max-width: 860px) {
-  .App {
-    margin: 12px;
-  }
-}
