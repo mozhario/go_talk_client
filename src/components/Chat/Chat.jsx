@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "api";
+import { connect } from "chat/api";
 import "./Chat.scss";
 import Header from 'components/Chat/Header/Header';
 import ChatHistory from 'components/Chat/ChatHistory/ChatHistory';
@@ -16,21 +16,25 @@ class Chat extends Component {
       chatHistory: [
         // Mocked data
         {
+          "type": "user_message",
           'username': 'Віртуальна Сопля',
           'text': 'Оксанааааа!',
           'sent_time': '31 feb 13:37',
         },
         {
+          "type": "user_message",
           'username': 'Злий Репер Зеник',
           'text': 'Блять дайте мі салямі, кусок як кінський хуй!',
           'sent_time': '31 feb 13:38',
         },
         {
+          "type": "user_message",
           'username': 'А продавщиця каже',
           'text': 'Гівно то не купуй! Якесь їбане чмо поклало ГМО! То є отрава, сука! Бля здохнеш в тяжких муках!',
           'sent_time': '31 feb 13:69',
         },
         {
+          "type": "user_message",
           'username': 'Василь Симоненко',
           'text': 'Ти знаєш що ти людина?<br>Ти знаєш про це чи ні?<br>Усмішка твоя - єдина,<br>Мука твоя - єдина,<br>Очі твої - одні.',
           'sent_time': '31 feb 14:69',

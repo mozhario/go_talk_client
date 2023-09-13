@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { sendMsg } from "api";
+import { sendMsg } from "chat/api";
 import "./MessageControls.scss";
 
 
