@@ -6,7 +6,9 @@ import "./MessageControls.scss";
 class ChatControls extends Component {
   constructor(props) {
     super(props);
-    this.state = { message: '', username: '' };
+    this.state = { message: ''};
+  
+    this.textareaRef = React.createRef();
   
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,28 +21,35 @@ class ChatControls extends Component {
 
   handleSubmit(event) {
     event.preventDefault(this.state.message);
-    console.log(this.state.message);
-    console.log(this.state.username);
+  
+    console.log(this.props.username);
+
     var message = {
-      'sent_time': '31 feb 13:69',
-      'username': this.state.username,
+      'sent_time': new Date(),
+      'username': this.props.username,
       'text': this.state.text,
     };
+
     var serializedMessage = JSON.stringify(message);
     sendMsg(serializedMessage);
+
+    this.setState({
+      text: ''
+    });
+  
+    this.textareaRef.current.focus();
+  }
+
+  handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent creating a new line
+      this.handleSubmit(event);
+    }
   }
 
   render() {
     return (
       <form className="chat-controls" onSubmit={this.handleSubmit}>
-        <input 
-          type="text"
-          name="username"
-          placeholder="username"
-          className="chat-controls__message-input"
-          value={this.state.username}
-          onChange={this.handleChange} />
-
         <textarea 
           rows="3"
           name="text"
@@ -48,7 +57,9 @@ class ChatControls extends Component {
           className="chat-controls__message-input"
           placeholder="talk..."
           value={this.state.text}
-          onChange={this.handleChange}>
+          onChange={this.handleChange}
+          ref={this.textareaRef}
+          onKeyDown={this.handleKeyDown}>
         </textarea>
 
         <button

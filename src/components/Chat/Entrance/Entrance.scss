@@ -1,0 +1,36 @@
+.entrance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This ensures the form takes up the full height of the viewport */
+}
+
+.enter-form {
+
+    &__welcome-text {
+        margin-bottom: 40px;
+        color: rgb(100, 100, 100);
+        line-height: 1.5em;
+    }
+
+    &__username-input {
+        outline: none;
+        padding: 8px;
+        border: 2px lightgrey inset;
+    }
+
+    &__username-button {
+        padding: 8px;
+        border: 2px lightgrey outset;
+        margin-left: 4px;
+        cursor: pointer;
+
+        &:hover {
+            background-color:rgb(245, 245, 245);
+        }
+    
+        &:active {
+            border: 3px lightgrey inset;
+        }
+    }
+}

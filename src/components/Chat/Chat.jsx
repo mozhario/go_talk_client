@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "chat/api";
+import { fetchMessages } from "chat/api/api";
+import { connect } from "chat/api/websocket";
 import "./Chat.scss";
 import Header from 'components/Chat/Header/Header';
 import ChatHistory from 'components/Chat/ChatHistory/ChatHistory';
 import MessageControls from 'components/Chat/MessageControls/MessageControls';
 import FakeCloseButton from 'components/FakeCloseButton/FakeCloseButton';
+import Entrance from 'components/Chat/Entrance';
 
 class Chat extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { username: null };
 
     this.chatRef = React.createRef()
 
@@ -36,33 +40,47 @@ class Chat extends Component {
         {
           "type": "user_message",
           'username': 'Василь Симоненко',
-          'text': 'Ти знаєш що ти людина?<br>Ти знаєш про це чи ні?<br>Усмішка твоя - єдина,<br>Мука твоя - єдина,<br>Очі твої - одні.',
+          'text': 'Ти знаєш що ти людина?\nТи знаєш про це чи ні?\nУсмішка твоя - єдина,\nМука твоя - єдина,\nОчі твої - одні.',
           'sent_time': '31 feb 14:69',
         },
       ]
     }
   }
 
+  handleUsernameSubmit = (username) => {
+    console.log(`username: ${username}`);
+    this.setState({ username });
+  }
+
   render() {
     return (
       <div className="Chat" ref={this.chatRef}>
-        <Header />
-        <FakeCloseButton elementRef={ref => (this.chatRef = ref)}/>
-        <ChatHistory chatHistory={this.state.chatHistory} />
-        <MessageControls />
+        {this.state.username ? (
+          <div>
+            <Header />
+            <FakeCloseButton elementRef={ref => (this.chatRef = ref)}/>
+            <ChatHistory chatHistory={this.state.chatHistory} />
+            <MessageControls username={this.state.username} />
+          </div>
+        ) : (
+          <Entrance onUsernameSubmit={this.handleUsernameSubmit} />
+        )}
       </div>
     );
   }
 
   componentDidMount() {
+    fetchMessages()
+    .then(data => {
+      console.log(data)
+      this.setState({
+        chatHistory: data
+      });
+    });
+
     connect((msg) => {
       console.log("New text: " + msg.data)
       var messageData = JSON.parse(msg.data)
-      var messageItem = {
-        'username': messageData.username,
-        'text': messageData.text,
-        'sent_time': '31 feb 14:69',
-      }
       this.setState(prevState => ({
         chatHistory: [...this.state.chatHistory, messageData]
       }))
